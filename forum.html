@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capitale dynamique et culturelle.</title>
+    <link rel="stylesheet" href="css/css.css">
+</head>
+<body>
+    <!-- Vidéo de fond -->
+    <video class="video-background" autoplay loop muted>
+        <source src="videos/dakar_video.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+    </video>
+
+    <!-- En-tête -->
+    <header>
+        <h2>Inscrivez vous à notre news letter pour en savoir plus sur le pays!
+        </h2>
+    </header>
+
+    <!-- Menu de navigation -->
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="forum.html">News letter</a>
+        <a href="about.html">À propos</a>
+    </nav>
+
+    <!-- Section des points forts -->
+    <div class="form-container">
+        <h2>Inscription</h2>
+        <form id="registrationForm">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" placeholder="Entrez votre nom" required>
+
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom" required>
+
+            <label for="age">Âge :</label>
+            <input type="number" id="age" name="age" min="1" placeholder="Entrez votre âge" required>
+
+            <label for="email">E-mail :</label>
+            <input type="email" id="email" name="email" placeholder="Entrez votre e-mail" required>
+
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" minlength="6" placeholder="Entrez un mot de passe" required>
+
+            <div class="error" id="errorMessage"></div>
+
+            <button type="button" onclick="validateForm()">S'inscrire</button>
+        </form>
+    </div>
+
+    <script>
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expression régulière pour valider l'email
+            return emailRegex.test(email);
+        }
+
+        function validateForm() {
+            const nom = document.getElementById("nom").value.trim();
+            const prenom = document.getElementById("prenom").value.trim();
+            const age = document.getElementById("age").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorMessage = document.getElementById("errorMessage");
+
+            errorMessage.textContent = "";
+
+            if (!nom || !prenom || !age || !email || !password) {
+                errorMessage.textContent = "Tous les champs doivent être remplis.";
+                return;
+            }
+
+            if (isNaN(age) || age <= 0) {
+                errorMessage.textContent = "Veuillez entrer un âge valide.";
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                errorMessage.textContent = "Veuillez entrer une adresse e-mail valide.";
+                return;
+            }
+
+            if (password.length < 6) {
+                errorMessage.textContent = "Le mot de passe doit contenir au moins 6 caractères.";
+                return;
+            }
+
+            alert(`Bienvenue, ${prenom} ${nom}! Inscription réussie.`);
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Découverte du Sénégal. Tous droits réservés.
+    </footer>
+</body>
+</html>
